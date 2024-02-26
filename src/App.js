@@ -1,54 +1,32 @@
-import { useState } from 'react'
+import React, {useState} from 'react'
 import './App.css';
 
 import {createMockServer} from "./createMockServer";
+import Search from "./components/Search";
+import WeatherCard from "./components/WeatherCard"
 
 if(process.env.NODE_ENV === 'development'){
     createMockServer()
 }
 
-function App() {
-    const [query, setQuery] = useState('')
-    const [searchResults, setSearchResults] = useState([])
+function WeatherApplication() {
     const [selected,setSelected] = useState([])
 
-
-    const inputChangeHandler = (event) =>{
-        setQuery(event.target.value)
+    const selectCity = (city) => {
+        setSelected([city,...selected])
     }
-
-    const buttonClickHandler = () =>{
-          fetch(`http://api.openweather.org/geo/1.0/direct/?query=${query}&limit=5`)
-          .then((result) =>{
-            return result.json()
-          })
-          .then((cities) =>{
-            setSearchResults((cities.map((city)=>({
-              name:city.name,
-              country:city.country,
-              lat: city.lat,
-              lon: city.lon
-            }))))
-          })
-    }
-    const selectCity = (city) =>{
-        setSelected([city, ...selected])
-    }
-
 
     return (
         <div className="App">
-            <h1>Weather Application</h1>
-            <input type="test" data-testid="search-input" onChange={inputChangeHandler}/>
-            <button data-testid="search-button" onClick={buttonClickHandler} >Search</button>
-            <div data-testid="search-results">
-                {searchResults.map((city) => <div key={`${city.lat}-${city.lon}`} onClick={() => selectCity(city)}>{city.name}, {city.lat}, {city.lon} </div>)}
-            </div>
+            <h1></h1>
+            <Search onSelectItem={selectCity}></Search>
             <div data-testid="my-weather-list">
-                {selected && selected.map((city) =><div key={`${city.lat}-${city.lon}`}>{city.name}</div>)}
+                {selected && selected.map((city) =>
+                    <WeatherCard key={`${city.lat}-${city.lon}`} city={city} />
+                )}
             </div>
         </div>
     );
 }
 
-export default App;
+export default WeatherApplication;
