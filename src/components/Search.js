@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import './Search.css';
 
 const Search = ({onSelectItem}) =>{
 
@@ -28,7 +29,6 @@ const Search = ({onSelectItem}) =>{
     return (
         <div className="search-container">
         <div className="input-container">
-            <h1>Weather Application</h1>
             <input type="test" data-testid="search-input" onChange={inputChangeHandler}/>
             <button data-testid="search-button" onClick={buttonClickHandler}>Search</button>
         </div>

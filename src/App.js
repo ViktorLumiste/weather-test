@@ -18,6 +18,7 @@ function WeatherApplication() {
 
     return (
         <div className="App">
+            <h1>Weather application</h1>
             <Search onSelectItem={selectCity}></Search>
             <div data-testid="my-weather-list">
                 {selected && selected.map((city) =>
