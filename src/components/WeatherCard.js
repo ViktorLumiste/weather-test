@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-
+import './WeatherCard.css'
 const WeatherCard =({city}) =>{
     const [weather, setWeather] = useState({})
 
@@ -17,7 +17,7 @@ const WeatherCard =({city}) =>{
     }, [city]);
 
     return(
-        <div>
+        <div className={`weather-container ${weather && weather.main.toLowerCase()}`}>
             <h3>{city.name}</h3>
             <p>{weather ? weather.temperature : '-/-'}</p>
             <p>{weather && weather.main}</p>

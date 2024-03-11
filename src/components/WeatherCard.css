@@ -1,0 +1,9 @@
+.weather-container{
+    flex:1;
+    max-width:160px;
+    padding:1rem;
+    font-weight:lighter;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    box-shadow: 0 0 4px -3px rgba(0,0,0,0.3);
+}
